@@ -18,8 +18,8 @@
 #define CONVERT_UNSIGNED 2
 #define USE_GETLINE 0
 #define USE_STRTOK 0
-#define HIST_FILE ".simple_shell_history"
-#define HIST_MAX 4096
+#define HIST_FILE	".simple_shell_history"
+#define HIST_MAX	4096
 
 /**
  * struct liststr – called a singly linked list
@@ -61,10 +61,11 @@ typedef struct passinfo
 	char *arg;
 	char **argv;
 	char *path;
+	
 	char *fname;
 	list_t *env;
 	list_t *history;
-        int argc;
+int argc;
 	unsigned int line_count;
 	int err_num;
 	int linecount_flag;
@@ -73,11 +74,16 @@ typedef struct passinfo
 	char **environ;
 	int env_changed;
 	int histcount;
+
 	char **cmd_buf;
 	int cmd_buf_type;
 	int readfd;
 	
-}
+} info_t;
+
+#define INFO_INIT \
+{NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
+		0, 0, 0}
 
 /**
  * struct builtin - builtin string 
@@ -88,7 +94,7 @@ typedef struct builtin
 {
 	char *type;
 	int (*func)(info_t *);
-}
+} builtin_table;
 
 int hsh(info_t *, char **);
 void fork_cmd(info_t *);
